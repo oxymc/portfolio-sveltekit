@@ -8,6 +8,7 @@
 	import { logout } from '../firebase';
 	import { loading } from '$lib/stores/globalStore';
 	import LoaderBig from '$lib/LoaderBig.svelte';
+	import { base } from '$app/paths';
 
 	onMount(() => {
 		if (browser) {
@@ -27,9 +28,9 @@
 			</button>
 			<div class="collapse navbar-collapse">
 				<div class="navbar-nav">
-					<a class="nav-link" href="/education">Education</a>
-					<a class="nav-link" href="/skills">Skills</a>
-					<a class="nav-link" href="/learn">Learning now</a>
+					<a class="nav-link" href="{base}/education">Education</a>
+					<a class="nav-link" href="{base}/skills">Skills</a>
+					<a class="nav-link" href="{base}/learn">Learning now</a>
 				</div>
 			</div>
 		</div>
@@ -43,7 +44,7 @@
 		{#if $loading}
 			<LoaderBig />
 		{:else}
-			<a class="link__admin text-center" href="/admin">
+			<a class="link__admin text-center" href="{base}/admin">
 				<i class="bi bi-gear" />
 			</a>
 			<div class="nav nav-pills nav-flush flex-column mb-auto mt-auto text-center">
@@ -55,7 +56,7 @@
 						<i class="bi bi-box-arrow-left" />
 					</a>
 				{:else}
-					<a href="/admin">
+					<a href="{base}/admin">
 						<i class="bi bi-box-arrow-in-right" />
 					</a>
 				{/if}

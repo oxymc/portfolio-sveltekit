@@ -2,6 +2,8 @@ import { browser } from '$app/environment';
 import { getAboutDoc } from '../firebase';
 import { updateLoading } from '../lib/stores/globalStore';
 
+export const prerender = true
+
 export async function load() {
 	updateLoading(true)
 	if (browser) {
