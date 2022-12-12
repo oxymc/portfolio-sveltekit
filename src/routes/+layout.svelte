@@ -10,6 +10,8 @@
 	import LoaderBig from '$lib/LoaderBig.svelte';
 	import { base } from '$app/paths';
 
+	let menuIsOpen = false;
+
 	onMount(() => {
 		if (browser) {
 			$adminStatus = sessionStorage.getItem('logined') === 'true' ? true : false;
@@ -20,17 +22,26 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container navbar__container">
-			<a class="navbar-brand" href="/"
+			<a class="navbar-brand" href="/" on:click={() => (menuIsOpen = false)}
 				><img src="photo.webp" alt="mdo" width="24" height="24" class="rounded-circle" /></a
 			>
-			<button class="navbar-toggler" type="button">
+			<button
+				class="navbar-toggler"
+				class:open={menuIsOpen}
+				on:click={() => (menuIsOpen = !menuIsOpen)}
+				type="button"
+			>
 				<span class="navbar-toggler-icon" />
 			</button>
 			<div class="collapse navbar-collapse">
 				<div class="navbar-nav">
-					<a class="nav-link" href="{base}/education">Education</a>
-					<a class="nav-link" href="{base}/skills">Skills</a>
-					<a class="nav-link" href="{base}/learn">Learning now</a>
+					<a class="nav-link" href="{base}/education" on:click={() => (menuIsOpen = false)}
+						>Education</a
+					>
+					<a class="nav-link" href="{base}/skills" on:click={() => (menuIsOpen = false)}>Skills</a>
+					<a class="nav-link" href="{base}/learn" on:click={() => (menuIsOpen = false)}
+						>Learning now</a
+					>
 				</div>
 			</div>
 		</div>
@@ -44,7 +55,7 @@
 		{#if $loading}
 			<LoaderBig />
 		{:else}
-			<a class="link__admin text-center" href="{base}/admin">
+			<a class="link__admin text-center" href="{base}/admin" on:click={() => (menuIsOpen = false)}>
 				<i class="bi bi-gear" />
 			</a>
 			<div class="nav nav-pills nav-flush flex-column mb-auto mt-auto text-center">
@@ -52,11 +63,11 @@
 			</div>
 			<div class="d-flex flex-column text-center">
 				{#if $adminStatus}
-					<a href="/" on:click={logout}>
+					<a href="/" on:click={logout} on:click={() => (menuIsOpen = false)}>
 						<i class="bi bi-box-arrow-left" />
 					</a>
 				{:else}
-					<a href="{base}/admin">
+					<a href="{base}/admin" on:click={() => (menuIsOpen = false)}>
 						<i class="bi bi-box-arrow-in-right" />
 					</a>
 				{/if}
@@ -102,11 +113,7 @@
 			font-size: 20px;
 			margin: 1rem;
 		}
-		.navbar-collapse:hover {
-			display: block;
-		}
-		.navbar-toggler:focus + .navbar-collapse,
-		.navbar-toggler:hover + .navbar-collapse {
+		.navbar-toggler.open + .navbar-collapse {
 			display: block;
 		}
 	}
