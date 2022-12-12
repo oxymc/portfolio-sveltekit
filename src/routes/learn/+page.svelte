@@ -17,7 +17,7 @@
 	});
 </script>
 
-<h1>Learning...</h1>
+<h1>Learning now</h1>
 <div class="container" in:fade>
 	{#if $loading}
 		<div class="loader__fh">
